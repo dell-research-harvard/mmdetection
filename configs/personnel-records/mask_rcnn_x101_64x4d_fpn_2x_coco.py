@@ -11,13 +11,11 @@ model = dict(
         norm_cfg=dict(type='BN', requires_grad=True),
         style='pytorch',
         init_cfg=dict(
-            type='Pretrained', checkpoint='open-mmlab://resnext101_64x4d')))
+            type='Pretrained', checkpoint='open-mmlab://resnext101_64x4d')),
+    roi_head=dict(
+         bbox_head=dict(num_classes=1),
+         mask_head=dict(num_classes=1))) #change the num_classes in head to match the dataset's annotation
 
-# We also need to change the num_classes in head to match the dataset's annotation
-# model = dict(
-#     roi_head=dict(
-#         bbox_head=dict(num_classes=1),
-#         mask_head=dict(num_classes=1)))
 
 # Modify dataset related settings
 dataset_type = 'COCODataset'
