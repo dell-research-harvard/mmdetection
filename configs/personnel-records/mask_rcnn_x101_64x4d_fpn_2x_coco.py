@@ -37,3 +37,14 @@ data = dict(
 # We can use the pre-trained Mask RCNN model to obtain higher performance
 load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'
 
+optimizer = dict(type='SGD', lr=0.0002, momentum=0.9, weight_decay=0.0001)
+optimizer_config = dict(grad_clip=None)
+# Set customized learning policy
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.001,
+    step=[8])
+runner = dict(type='EpochBasedRunner', max_epochs=10)
+
