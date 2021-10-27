@@ -35,7 +35,7 @@ data = dict(
         ann_file='data/input/test10.json'))
 
 # We can use the pre-trained Mask RCNN model to obtain higher performance
-load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'
+load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.5/swin_tiny_c24_patch4_window8_256.pth'
 
 optimizer = dict(type='SGD', lr=0.0002, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
