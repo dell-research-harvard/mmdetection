@@ -1,7 +1,7 @@
 _base_ = [
-    '../../_base_/models/cascade_mask_rcnn_swin_fpn.py',
-    '../../_base_/datasets/coco_instance.py',
-    '../../_base_/schedules/schedule_1x.py', '../../_base_/default_runtime.py'
+    '../_base_/models/cascade_mask_rcnn_swin_fpn.py',
+    '../_base_/datasets/coco_instance.py',
+    '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
 
 model = dict(
@@ -20,8 +20,6 @@ model = dict(
         bbox_head=[
             dict(
                 type='ConvFCBBoxHead',
-                bbox_head=dict(num_classes=1),
-                mask_head=dict(num_classes=1),
                 num_shared_convs=4,
                 num_shared_fcs=1,
                 in_channels=256,
@@ -82,23 +80,6 @@ model = dict(
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 
-# Modify dataset related settings
-dataset_type = 'COCODataset'
-classes = ('character',)
-data = dict(
-    train=dict(
-        img_prefix='data/generated/',
-        classes=classes,
-        ann_file='data/input/train90.json'),
-    val=dict(
-        img_prefix='data/generated/',
-        classes=classes,
-        ann_file='data/input/train90_val10.json'),
-    test=dict(
-        img_prefix='data/generated/',
-        classes=classes,
-        ann_file='data/input/test10.json'))
-
 # augmentation strategy originates from DETR / Sparse RCNN
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -157,5 +138,3 @@ optimizer_config = dict(
     bucket_size_mb=-1,
     use_fp16=True,
 )
-
-load_from='https://github.com/SwinTransformer/storage/releases/download/v1.0.2/cascade_mask_rcnn_swin_base_patch4_window7.pth'
