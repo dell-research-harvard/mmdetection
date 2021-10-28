@@ -21,7 +21,7 @@ model = dict(
             dict(
                 type='ConvFCBBoxHead',
                 bbox_head=dict(num_classes=1),
-                mask_head=dict(num_classes=1)
+                mask_head=dict(num_classes=1),
                 num_shared_convs=4,
                 num_shared_fcs=1,
                 in_channels=256,
