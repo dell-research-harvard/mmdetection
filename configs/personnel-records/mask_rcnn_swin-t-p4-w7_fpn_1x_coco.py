@@ -1,6 +1,6 @@
 _base_ = [
     '../_base_/models/mask_rcnn_r50_fpn.py',
-#    '../_base_/datasets/coco_instance.py',
+    '../_base_/datasets/coco_detection.py',
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa
@@ -24,6 +24,9 @@ model = dict(
         with_cp=False,
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
+    roi_head=dict(
+         bbox_head=dict(num_classes=1),
+         mask_head=dict(num_classes=1)), #change the num_classes in head to match the dataset's annotation
     neck=dict(in_channels=[96, 192, 384, 768]))
 dataset_type = 'COCODataset'
 classes = ('character',)
