@@ -25,8 +25,7 @@ model = dict(
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     roi_head=dict(
-         bbox_head=dict(num_classes=1),
-         mask_head=dict(num_classes=1)), #change the num_classes in head to match the dataset's annotation
+         bbox_head=dict(num_classes=1)), #change the num_classes in head to match the dataset's annotation
     neck=dict(in_channels=[96, 192, 384, 768]))
 dataset_type = 'COCODataset'
 classes = ('character',)
