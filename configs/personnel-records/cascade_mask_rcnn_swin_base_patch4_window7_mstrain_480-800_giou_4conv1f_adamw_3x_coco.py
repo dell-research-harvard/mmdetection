@@ -3,7 +3,7 @@ _base_ = [
     '../_base_/datasets/coco_detection.py',
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
-pretrained='https://github.com/SwinTransformer/storage/releases/download/v1.0.5/swin_tiny_c24_patch4_window8_256.pth'
+#pretrained='https://github.com/SwinTransformer/storage/releases/download/v1.0.5/swin_tiny_c24_patch4_window8_256.pth'
 model = dict(
     backbone=dict(
 #        embed_dim=128,
@@ -14,7 +14,7 @@ model = dict(
         drop_path_rate=0.3,
         patch_norm=True,
 #        use_checkpoint=False,
-        init_cfg=dict(type='Pretrained', checkpoint=pretrained)
+#        init_cfg=dict(type='Pretrained', checkpoint=pretrained)
     ),
     neck=dict(in_channels=[128, 256, 512, 1024]),
     roi_head=dict(
