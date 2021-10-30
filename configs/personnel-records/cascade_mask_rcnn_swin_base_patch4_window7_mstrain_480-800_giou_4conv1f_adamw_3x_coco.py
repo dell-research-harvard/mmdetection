@@ -1,9 +1,9 @@
 _base_ = [
     '../_base_/models/cascade_mask_rcnn_swin_fpn.py',
-    '../_base_/datasets/coco_instance.py',
+    '../_base_/datasets/coco_detection.py',
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
-
+pretrained='https://github.com/SwinTransformer/storage/releases/download/v1.0.5/swin_tiny_c24_patch4_window8_256.pth'
 model = dict(
     backbone=dict(
         embed_dim=128,
@@ -13,7 +13,8 @@ model = dict(
         ape=False,
         drop_path_rate=0.3,
         patch_norm=True,
-        use_checkpoint=False
+        use_checkpoint=False,
+        init_cfg=dict(type='Pretrained', checkpoint=pretrained)
     ),
     neck=dict(in_channels=[128, 256, 512, 1024]),
     roi_head=dict(
@@ -77,6 +78,10 @@ model = dict(
                 loss_bbox=dict(type='GIoULoss', loss_weight=10.0))
         ]))
 
+# Modify dataset related settings
+dataset_type = 'COCODataset'
+classes = ('character',)
+
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 
@@ -119,14 +124,27 @@ train_pipeline = [
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
 ]
-data = dict(train=dict(pipeline=train_pipeline))
+data = dict(
+    train=dict(
+        img_prefix='data/generated/',
+        classes=classes,
+        ann_file='data/input/train90.json',
+        pipeline=train_pipeline),
+    val=dict(
+        img_prefix='data/generated/',
+        classes=classes,
+        ann_file='data/input/train90_val10.json'),
+    test=dict(
+        img_prefix='data/generated/',
+        classes=classes,
+        ann_file='data/input/test10.json'))
 
 optimizer = dict(_delete_=True, type='AdamW', lr=0.0001, betas=(0.9, 0.999), weight_decay=0.05,
                  paramwise_cfg=dict(custom_keys={'absolute_pos_embed': dict(decay_mult=0.),
                                                  'relative_position_bias_table': dict(decay_mult=0.),
                                                  'norm': dict(decay_mult=0.)}))
 lr_config = dict(step=[27, 33])
-runner = dict(type='EpochBasedRunnerAmp', max_epochs=36)
+runner = dict(type='EpochBasedRunnerAmp', max_epochs=50)
 
 # do not use mmdet version fp16
 fp16 = None
