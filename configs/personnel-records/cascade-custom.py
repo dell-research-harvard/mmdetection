@@ -419,7 +419,6 @@ optimizer = dict(
             norm=dict(decay_mult=0.0))))
 optimizer_config = dict(
     grad_clip=None,
-    coalesce=True,
     bucket_size_mb=-1,
     use_fp16=True)
 lr_config = dict(
