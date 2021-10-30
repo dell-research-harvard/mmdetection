@@ -6,13 +6,21 @@ _base_ = [
 
 model = dict(
     backbone=dict(
-        embed_dims=96,
+        type='SwinTransformer',
+        embed_dim=96,
         depths=[2, 2, 6, 2],
         num_heads=[3, 6, 12, 24],
         window_size=7,
-        drop_path_rate=0.0,
+        mlp_ratio=4.,
+        qkv_bias=True,
+        qk_scale=None,
+        drop_rate=0.,
+        attn_drop_rate=0.,
+        drop_path_rate=0.2,
+        ape=False,
         patch_norm=True,
-    ),
+        out_indices=(0, 1, 2, 3),
+        use_checkpoint=False),
     neck=dict(in_channels=[96, 192, 384, 768]),
     roi_head=dict(
         bbox_head=[
