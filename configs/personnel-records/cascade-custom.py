@@ -427,9 +427,6 @@ lr_config = dict(
 runner = dict(type='EpochBasedRunner', max_epochs=36)
 checkpoint_config = dict(interval=5)
 log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
-custom_hooks = [dict(type='NumClassCheckHook')]
-dist_params = dict(backend='nccl')
-log_level = 'INFO'
 load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.2/cascade_mask_rcnn_swin_small_patch4_window7.pth'
 resume_from = None
 workflow = [('train', 1)]
