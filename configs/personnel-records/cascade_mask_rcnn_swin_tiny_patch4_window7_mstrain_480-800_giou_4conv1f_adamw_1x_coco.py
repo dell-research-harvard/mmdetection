@@ -5,7 +5,6 @@ _base_ = [
 ]
 
 model = dict(
-    type='CascadeMaskRCNN',
     backbone=dict(
         type='SwinTransformer',
         embed_dims=96,
