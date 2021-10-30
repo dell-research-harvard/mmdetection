@@ -80,6 +80,8 @@ train_pipeline = [
 ]
 
 data = dict(
+    samples_per_gpu=4,  # Batch size of a single GPU
+    workers_per_gpu=4,  # Worker to pre-fetch data for each single GPU
     train=dict(
         img_prefix='data/generated/',
         classes=classes,
