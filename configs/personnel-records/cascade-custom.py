@@ -1,6 +1,5 @@
 model = dict(
     type='CascadeRCNN',
-    pretrained=True,
     backbone=dict(
         type='SwinTransformer',
         embed_dims=96,
