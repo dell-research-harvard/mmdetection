@@ -418,9 +418,7 @@ optimizer = dict(
             relative_position_bias_table=dict(decay_mult=0.0),
             norm=dict(decay_mult=0.0))))
 optimizer_config = dict(
-    grad_clip=None,
-    bucket_size_mb=-1,
-    use_fp16=True)
+    grad_clip=None)
 lr_config = dict(
     policy='step',
     warmup='linear',
