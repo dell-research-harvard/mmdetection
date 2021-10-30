@@ -417,13 +417,12 @@ optimizer = dict(
             absolute_pos_embed=dict(decay_mult=0.0),
             relative_position_bias_table=dict(decay_mult=0.0),
             norm=dict(decay_mult=0.0))))
-# optimizer_config = dict(
-#     grad_clip=None,
-#     type='DistOptimizerHook',
-#     update_interval=1,
-#     coalesce=True,
-#     bucket_size_mb=-1,
-#     use_fp16=True)
+optimizer_config = dict(
+    grad_clip=None,
+    update_interval=1,
+    coalesce=True,
+    bucket_size_mb=-1,
+    use_fp16=True)
 lr_config = dict(
     policy='step',
     warmup='linear',
