@@ -424,7 +424,6 @@ data = dict(
 #     warmup_ratio=0.001,
 #     step=[27, 33])
 optimizer = dict(
-    _delete_=True,
     type='AdamW',
     lr=0.0001,
     betas=(0.9, 0.999),
