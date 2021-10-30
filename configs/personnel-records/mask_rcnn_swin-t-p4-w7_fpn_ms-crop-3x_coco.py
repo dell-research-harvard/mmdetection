@@ -4,7 +4,7 @@ _base_ = [
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
 
-pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth'  # noqa
+pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa
 
 model = dict(
     type='MaskRCNN',
@@ -80,8 +80,6 @@ train_pipeline = [
 ]
 
 data = dict(
-    samples_per_gpu=4,  # Batch size of a single GPU
-    workers_per_gpu=4,  # Worker to pre-fetch data for each single GPU
     train=dict(
         img_prefix='data/generated/',
         classes=classes,
