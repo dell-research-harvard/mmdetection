@@ -437,8 +437,8 @@ optimizer = dict(
 lr_config = dict(warmup_iters=1000, step=[27, 33])
 runner = dict(type='EpochBasedRunner', max_epochs=36)
 
-# load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.2/cascade_mask_rcnn_swin_small_patch4_window7.pth'
+load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.2/cascade_mask_rcnn_swin_small_patch4_window7.pth'
 # resume_from = None
 # workflow = [('train', 1)]
-# fp16 = None
+fp16 = None
 
