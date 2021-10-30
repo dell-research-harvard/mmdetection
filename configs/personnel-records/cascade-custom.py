@@ -1,6 +1,6 @@
 model = dict(
     type='CascadeRCNN',
-    pretrained=None,
+    pretrained=True,
     backbone=dict(
         type='SwinTransformer',
         embed_dims=96,
@@ -16,7 +16,7 @@ model = dict(
         patch_norm=True,
         out_indices=(0, 1, 2, 3)),
     neck=dict(
-        type='FFN',
+        type='FPN',
         in_channels=[96, 192, 384, 768],
         out_channels=256,
         num_outs=5),
