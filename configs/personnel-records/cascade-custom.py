@@ -434,7 +434,7 @@ optimizer = dict(
             'relative_position_bias_table': dict(decay_mult=0.),
             'norm': dict(decay_mult=0.)
         }))
-lr_config = dict(warmup_iters=1000, step=[27, 33])
+lr_config = dict(policy='step', warmup_iters=1000, step=[27, 33])
 runner = dict(type='EpochBasedRunner', max_epochs=36)
 
 load_from = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.2/cascade_mask_rcnn_swin_small_patch4_window7.pth'
