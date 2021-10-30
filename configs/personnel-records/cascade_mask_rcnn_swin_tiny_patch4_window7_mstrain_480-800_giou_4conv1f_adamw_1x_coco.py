@@ -17,10 +17,8 @@ model = dict(
         drop_rate=0.,
         attn_drop_rate=0.,
         drop_path_rate=0.2,
-        ape=False,
         patch_norm=True,
-        out_indices=(0, 1, 2, 3),
-        use_checkpoint=False),
+        out_indices=(0, 1, 2, 3)),
     neck=dict(in_channels=[96, 192, 384, 768]),
     roi_head=dict(
         bbox_head=[
